@@ -15,7 +15,6 @@ def translate_vowels(word)
 end
 
 def translate_cons(word)
-  #return word[2..-1] + word[0..1] + "ay" if cons?(word[0..1])
   count_cons = 0
   (0..word.length-1).each do |index|
     if !cons?(word[index])
