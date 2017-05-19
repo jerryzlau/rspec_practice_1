@@ -10,17 +10,23 @@ def translate(string)
   answer.strip
 end
 
-def translate_vowels(string)
-  string + "ay"
+def translate_vowels(word)
+  word + "ay"
 end
 
-def translate_cons(string)
+def translate_cons(word)
+  #return word[2..-1] + word[0..1] + "ay" if cons?(word[0..1])
   count_cons = 0
-  (0..string.length-1).each do |index|
-    break if !cons?(string[index])
+  (0..word.length-1).each do |index|
+    if !cons?(word[index])
+      break
+    end
     count_cons += 1
+    if cons?(word[index] + word[index+1])
+      count_cons += 1
+    end
   end
-  string[count_cons..-1] + string[0..count_cons-1] + "ay"
+  word[count_cons..-1] + word[0..count_cons-1] + "ay"
 end
 
 def vowels?(letter)
@@ -30,6 +36,8 @@ end
 
 def cons?(letter)
   vowels = "aeiou"
-  cons = ("a".."z").to_a.reject {|alphabet| vowels.include?(alphabet)}
+  cons = ("a".."z").to_a.reject {|alphabet| vowels.include?(alphabet)} << "qu"
   cons.include?(letter)
 end
+
+p translate("square")
